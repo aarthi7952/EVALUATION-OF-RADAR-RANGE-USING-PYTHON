@@ -18,12 +18,58 @@ The Radar Range Equation is a fundamental formula used in radar system design to
 
 
 ### Program
+```
+import numpy as np
+import matplotlib.pyplot as plt
 
+lambda_r = 0.03
+sigma = 1
+
+Pt_vals = np.arange(0.1, 10.1, 0.1)
+Gt_const = 35
+Pm_const = 1e-13
+
+Rmax_Pt = ((Pt_vals * Gt_const**2 * lambda_r**2 * sigma) /
+          ((4*np.pi)**3 * Pm_const))**0.25
+
+Gt_vals = np.arange(1, 51)
+Pt_const = 2
+Pm_const = 1e-13
+
+Rmax_Gt = ((Pt_const * Gt_vals**2 * lambda_r**2 * sigma) /
+          ((4*np.pi)**3 * Pm_const))**0.25
+
+Pm_vals = np.logspace(-15, -10, 50)
+Pt_const = 2
+Gt_const = 35
+
+Rmax_Pm = ((Pt_const * Gt_const**2 * lambda_r**2 * sigma) /
+          ((4*np.pi)**3 * Pm_vals))**0.25
+
+plt.figure(figsize=(5,15))
+
+plt.subplot(3,1,1)
+plt.plot(Pt_vals, Rmax_Pt)
+plt.title("Radar Range vs Pt"); plt.grid(True)
+plt.xlabel("Pt (W)"); plt.ylabel("Rmax (m)")
+
+plt.subplot(3,1,2)
+plt.plot(Gt_vals, Rmax_Gt)
+plt.title("Radar Range vs Gt"); plt.grid(True)
+plt.xlabel("Gt"); plt.ylabel("Rmax (m)")
+
+plt.subplot(3,1,3)
+plt.semilogx(Pm_vals, Rmax_Pm)
+plt.title("Radar Range vs Pm"); plt.grid(True)
+plt.xlabel("Pm (W)"); plt.ylabel("Rmax (m)")
+
+plt.show()
+```
 ### Tabulation
+![515799300-f78d704a-0f41-48e8-b16a-9ec552f1ce0c](https://github.com/user-attachments/assets/9637ec12-f33b-41a4-9932-4b6bd000f710)
 
 ### Output
-
+<img width="474" height="1245" alt="515799425-533110d4-5e36-4e5d-9571-215740e1c0e1" src="https://github.com/user-attachments/assets/e0c579e9-6208-449d-a1ad-cd3eb2d4c49e" />
 
 ### Result
-
-
+Thus, the maximum range of a radar system using the Radar Range Equation is verified through a Python program.
